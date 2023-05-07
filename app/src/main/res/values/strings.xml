@@ -1,3 +1,8 @@
 <resources>
     <string name="app_name">Czolo</string>
+    <string name="tut">Po kliknięciu przycisku
+"LOSUJ" lub "START!"
+Gracz trzymający telefon powinien przystawić go do czoła, tak aby reszta graczy widziała dokładnie jakie jest hasło, następnie trzymający telefon zadaje pytania, a reszta graczy odpowiada tak lub nie, zadaniem gracza trzymajacego jest zgadniecie hasła przed upływem
+60 sekund, Powodzenia!
+    </string>
 </resources>
