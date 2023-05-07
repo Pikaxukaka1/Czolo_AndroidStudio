@@ -3,7 +3,6 @@ package com.example.czolo;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
-import android.view.View;
 import android.widget.Button;
 
 public class SecondActivity extends AppCompatActivity {
@@ -14,11 +13,6 @@ public class SecondActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main2);
 
         Button okBtn = findViewById(R.id.okBtn);
-        okBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                finish();
-            }
-        });
+        okBtn.setOnClickListener(view -> finish());
     }
 }

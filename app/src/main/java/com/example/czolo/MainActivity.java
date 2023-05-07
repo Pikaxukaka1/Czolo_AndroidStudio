@@ -1,12 +1,15 @@
 package com.example.czolo;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.CountDownTimer;
-import android.view.LayoutInflater;
+import android.os.VibrationEffect;
+import android.os.Vibrator;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
@@ -23,7 +26,6 @@ public class MainActivity extends AppCompatActivity {
     private TextView wordTextView, timerTextView;
     private Button startButton, shuffleButton;
 
-    private List<String> animalsList, fruitsList, countriesList, sportsList, gameList;
     private List<List<String>> categoriesList;
 
     private CountDownTimer countDownTimer;
@@ -31,6 +33,7 @@ public class MainActivity extends AppCompatActivity {
     private boolean timerRunning;
 
     private boolean run = true;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,7 +46,7 @@ public class MainActivity extends AppCompatActivity {
         startButton = findViewById(R.id.start_button);
         shuffleButton = findViewById(R.id.shuffle_button);
 
-        animalsList = new ArrayList<>();
+        List<String> animalsList = new ArrayList<>();
         animalsList.add("Lew");
         animalsList.add("Tygrys");
         animalsList.add("Słoń");
@@ -86,7 +89,7 @@ public class MainActivity extends AppCompatActivity {
         animalsList.add("Antylopa");
         animalsList.add("Puma");
 
-        fruitsList = new ArrayList<>();
+        List<String> fruitsList = new ArrayList<>();
         fruitsList.add("Jabłko");
         fruitsList.add("Banan");
         fruitsList.add("Pomarańcza");
@@ -117,7 +120,7 @@ public class MainActivity extends AppCompatActivity {
         fruitsList.add("Winogrono");
         fruitsList.add("Żurawina");
 
-        countriesList = new ArrayList<>();
+        List<String> countriesList = new ArrayList<>();
         countriesList.add("Usa");
         countriesList.add("Chiny");
         countriesList.add("Indie");
@@ -194,7 +197,7 @@ public class MainActivity extends AppCompatActivity {
         countriesList.add("Włochy");
         countriesList.add("Wielka Brytania");
 
-        sportsList = new ArrayList<>();
+        List<String> sportsList = new ArrayList<>();
         sportsList.add("Koszykówka");
         sportsList.add("Siadkówka");
         sportsList.add("Tenis");
@@ -214,7 +217,7 @@ public class MainActivity extends AppCompatActivity {
         sportsList.add("Badminton");
         sportsList.add("Akrobatyka");
 
-        gameList = new ArrayList<>();
+        List<String> gameList = new ArrayList<>();
         gameList.add("Wiedźmin");
         gameList.add("The Forest");
         gameList.add("Cyberpunk 2077");
@@ -267,69 +270,54 @@ public class MainActivity extends AppCompatActivity {
         wordTextView.setVisibility(View.INVISIBLE);
 
         Button howToPlay = findViewById(R.id.howToPlay);
-        howToPlay.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                startActivity(new Intent(MainActivity.this, SecondActivity.class));
-            }
-        });
+        howToPlay.setOnClickListener(view -> startActivity(new Intent(MainActivity.this, SecondActivity.class)));
 
-        startButton.setOnClickListener(new View.OnClickListener() {
+        startButton.setOnClickListener(view -> new CountDownTimer(5000, 1000) {
             @Override
-            public void onClick(View view) {
-                new CountDownTimer(5000, 1000) {
-                    @Override
-                    public void onTick(long millisUntilFinished) {
-                        // Show countdown in the wordTextView
-                        wordTextView.setText(String.valueOf(millisUntilFinished / 1000));
-                        startButton.setVisibility(View.GONE);
-                        wordTextView.setVisibility(View.VISIBLE);
-                        shuffleButton.setEnabled(false);
-                        categorySpinner.setEnabled(false);
-                    }
-
-                    @Override
-                    public void onFinish() {
-                        // Update word and start timer
-                        if (!timerRunning) {
-                            shuffleWord();
-                            startTimer();
-                        }
-                        wordTextView.setVisibility(View.VISIBLE);
-                        shuffleButton.setEnabled(true);
-                        categorySpinner.setEnabled(true);
-                    }
-                }.start();
+            public void onTick(long millisUntilFinished) {
+                // Show countdown in the wordTextView
+                wordTextView.setText(String.valueOf(millisUntilFinished / 1000));
+                startButton.setVisibility(View.GONE);
+                wordTextView.setVisibility(View.VISIBLE);
+                shuffleButton.setEnabled(false);
+                categorySpinner.setEnabled(false);
             }
-        });
+
+            @Override
+            public void onFinish() {
+                // Update word and start timer
+                if (!timerRunning) {
+                    shuffleWord();
+                    startTimer();
+                }
+                wordTextView.setVisibility(View.VISIBLE);
+                shuffleButton.setEnabled(true);
+                categorySpinner.setEnabled(true);
+            }
+        }.start());
 
         // Set up shuffle button click listener
-        shuffleButton.setOnClickListener(new View.OnClickListener() {
+        shuffleButton.setOnClickListener(view -> new CountDownTimer(5000, 1000) {
             @Override
-            public void onClick(View view) {
-                new CountDownTimer(5000, 1000) {
-                    @Override
-                    public void onTick(long millisUntilFinished) {
-                        // Show countdown in the wordTextView
-                        wordTextView.setText(String.valueOf(millisUntilFinished / 1000));
-                        startButton.setVisibility(View.GONE);
-                        wordTextView.setVisibility(View.VISIBLE);
-                        shuffleButton.setEnabled(false);
-                        categorySpinner.setEnabled(false);
-                        run = false;
-                    }
-
-                    @Override
-                    public void onFinish() {
-                        run = true;
-                        shuffleWord();
-                        startTimer();
-                        shuffleButton.setEnabled(true);
-                        categorySpinner.setEnabled(true);
-                    }
-                }.start();
+            public void onTick(long millisUntilFinished) {
+                // Show countdown in the wordTextView
+                wordTextView.setText(String.valueOf(millisUntilFinished / 1000));
+                startButton.setVisibility(View.GONE);
+                wordTextView.setVisibility(View.VISIBLE);
+                shuffleButton.setEnabled(false);
+                categorySpinner.setEnabled(false);
+                run = false;
             }
-        });
+
+            @Override
+            public void onFinish() {
+                run = true;
+                shuffleWord();
+                startTimer();
+                shuffleButton.setEnabled(true);
+                categorySpinner.setEnabled(true);
+            }
+        }.start());
 
         // Set up category spinner item selected listener
         categorySpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -346,34 +334,39 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void startTimer() {
-        if (run == true){
             countDownTimer = new CountDownTimer(timeLeftInMillis, 1000)
             {
                 @Override
                 public void onTick(long millisUntilFinished) {
-                    if (run == true) {
+                    if (run) {
                         timeLeftInMillis = millisUntilFinished;
                         updateTimerText();
                     }
                 }
+                @SuppressLint("SetTextI18n")
                 @Override
                 public void onFinish() {
+                Vibrator vibrator = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
                 timerRunning = false;
                 timeLeftInMillis = 0;
                 updateTimerText();
                 timerTextView.setText("  Koniec!  ");
                 shuffleButton.setVisibility(View.VISIBLE);
+                vibrator.vibrate(VibrationEffect.createOneShot(1500, VibrationEffect.DEFAULT_AMPLITUDE));
             }
             }.start();
 
             timerRunning = true;
             shuffleButton.setVisibility(View.VISIBLE);
-        }
     }
 
     private void updateTimerText() {
         int seconds = (int) (timeLeftInMillis / 1000) % 60;
-        String timeLeftFormatted = String.format("%02d", seconds);
+        if (seconds == 1 || seconds == 2 || seconds == 3 || seconds == 4 || seconds == 5){
+            Vibrator vibrator = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
+            vibrator.vibrate(VibrationEffect.createOneShot(250, VibrationEffect.DEFAULT_AMPLITUDE));
+        }
+        @SuppressLint("DefaultLocale") String timeLeftFormatted = String.format("%02d", seconds);
         timerTextView.setText(timeLeftFormatted);
     }
 
@@ -401,7 +394,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     @Override
-    protected void onSaveInstanceState(Bundle outState) {
+    protected void onSaveInstanceState(@NonNull Bundle outState) {
         super.onSaveInstanceState(outState);
         outState.putInt("category", categorySpinner.getSelectedItemPosition());
         outState.putString("word", wordTextView.getText().toString());
