@@ -2,8 +2,11 @@ package com.example.czolo;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.CountDownTimer;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
@@ -262,6 +265,14 @@ public class MainActivity extends AppCompatActivity {
         categorySpinner.setAdapter(spinnerAdapter);
 
         wordTextView.setVisibility(View.INVISIBLE);
+
+        Button howToPlay = findViewById(R.id.howToPlay);
+        howToPlay.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(MainActivity.this, MainActivity2.class));
+            }
+        });
 
         startButton.setOnClickListener(new View.OnClickListener() {
             @Override
