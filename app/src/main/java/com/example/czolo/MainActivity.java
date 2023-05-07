@@ -242,6 +242,7 @@ public class MainActivity extends AppCompatActivity {
         gameList.add("Kangurek Kao");
         gameList.add("Metro");
         gameList.add("Uncharted");
+        gameList.add("Amnesia");
 
         categoriesList = new ArrayList<>();
         categoriesList.add(animalsList);
