@@ -5,4 +5,9 @@
 Gracz trzymający telefon powinien przystawić go do czoła, tak aby reszta graczy widziała dokładnie jakie jest hasło, następnie trzymający telefon zadaje pytania, a reszta graczy odpowiada tak lub nie, zadaniem gracza trzymajacego jest zgadniecie hasła przed upływem
 60 sekund, Powodzenia!
     </string>
+    <string name="how">Jak grać?</string>
+    <string name="start">START!</string>
+    <string name="losuj">LOSUJ</string>
+    <string name="czas">CZAS</string>
+    <string name="ok">OK</string>
 </resources>
