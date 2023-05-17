@@ -6,7 +6,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.os.VibrationEffect;
@@ -30,32 +29,16 @@ public class MainActivity extends AppCompatActivity {
     private List<List<String>> categoriesList;
 
     private CountDownTimer countDownTimer;
-    private long timeLeftInMillis = 60000;
+    private long timeLeftInMillis = 60000; // 60 seconds
     private boolean timerRunning;
 
     private boolean run = true;
-    private boolean visibility = true;
-
-    SharedPreferences sharedPreferences;
-
-    int seconds;
-    String currentWord;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
-        sharedPreferences = this.getSharedPreferences("com.example.czolo", Context.MODE_PRIVATE);
-
-        currentWord = wordTextView.getText().toString();
-
-        word = sharedPreferences.getString("word", "");
-        visibility = sharedPreferences.getBoolean("visibility", true);
-        timeLeftInMillis = sharedPreferences.getLong("timeLeftInMillis", 0);
-        timerRunning = sharedPreferences.getBoolean("timerRunning", false);
-        currentWord = sharedPreferences.getString("currentWord", "");
 
         categorySpinner = findViewById(R.id.category_spinner);
         wordTextView = findViewById(R.id.word_text_view);
@@ -289,13 +272,12 @@ public class MainActivity extends AppCompatActivity {
         Button howToPlay = findViewById(R.id.howToPlay);
         howToPlay.setOnClickListener(view -> startActivity(new Intent(MainActivity.this, SecondActivity.class)));
 
-
         startButton.setOnClickListener(view -> new CountDownTimer(5000, 1000) {
             @Override
             public void onTick(long millisUntilFinished) {
+                // Show countdown in the wordTextView
                 wordTextView.setText(String.valueOf(millisUntilFinished / 1000));
                 startButton.setVisibility(View.GONE);
-                visibility = false;
                 wordTextView.setVisibility(View.VISIBLE);
                 shuffleButton.setEnabled(false);
                 categorySpinner.setEnabled(false);
@@ -303,6 +285,7 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public void onFinish() {
+                // Update word and start timer
                 if (!timerRunning) {
                     shuffleWord();
                     startTimer();
@@ -313,14 +296,13 @@ public class MainActivity extends AppCompatActivity {
             }
         }.start());
 
-        shuffleButton.setOnClickListener(view -> {
-            word = "";
-            new CountDownTimer(5000, 1000) {
+        // Set up shuffle button click listener
+        shuffleButton.setOnClickListener(view -> new CountDownTimer(5000, 1000) {
             @Override
             public void onTick(long millisUntilFinished) {
+                // Show countdown in the wordTextView
                 wordTextView.setText(String.valueOf(millisUntilFinished / 1000));
                 startButton.setVisibility(View.GONE);
-                visibility = false;
                 wordTextView.setVisibility(View.VISIBLE);
                 shuffleButton.setEnabled(false);
                 categorySpinner.setEnabled(false);
@@ -335,8 +317,9 @@ public class MainActivity extends AppCompatActivity {
                 shuffleButton.setEnabled(true);
                 categorySpinner.setEnabled(true);
             }
-        }.start();});
+        }.start());
 
+        // Set up category spinner item selected listener
         categorySpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int position, long id) {
@@ -351,18 +334,18 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void startTimer() {
-            countDownTimer = new CountDownTimer(timeLeftInMillis, 1000)
-            {
-                @Override
-                public void onTick(long millisUntilFinished) {
-                    if (run) {
-                        timeLeftInMillis = millisUntilFinished;
-                        updateTimerText();
-                    }
+        countDownTimer = new CountDownTimer(timeLeftInMillis, 1000)
+        {
+            @Override
+            public void onTick(long millisUntilFinished) {
+                if (run) {
+                    timeLeftInMillis = millisUntilFinished;
+                    updateTimerText();
                 }
-                @SuppressLint("SetTextI18n")
-                @Override
-                public void onFinish() {
+            }
+            @SuppressLint("SetTextI18n")
+            @Override
+            public void onFinish() {
                 Vibrator vibrator = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
                 timerRunning = false;
                 timeLeftInMillis = 0;
@@ -371,14 +354,14 @@ public class MainActivity extends AppCompatActivity {
                 shuffleButton.setVisibility(View.VISIBLE);
                 vibrator.vibrate(VibrationEffect.createOneShot(1500, VibrationEffect.DEFAULT_AMPLITUDE));
             }
-            }.start();
+        }.start();
 
-            timerRunning = true;
-            shuffleButton.setVisibility(View.VISIBLE);
+        timerRunning = true;
+        shuffleButton.setVisibility(View.VISIBLE);
     }
 
     private void updateTimerText() {
-        seconds = (int) (timeLeftInMillis / 1000) % 60;
+        int seconds = (int) (timeLeftInMillis / 1000) % 60;
         if (seconds == 1 || seconds == 2 || seconds == 3 || seconds == 4 || seconds == 5){
             Vibrator vibrator = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
             vibrator.vibrate(VibrationEffect.createOneShot(250, VibrationEffect.DEFAULT_AMPLITUDE));
@@ -387,24 +370,23 @@ public class MainActivity extends AppCompatActivity {
         timerTextView.setText(timeLeftFormatted);
     }
 
-    String word;
-
     private void shuffleWord() {
-        if (word != "") {
-            int categoryIndex = categorySpinner.getSelectedItemPosition();
-            List<String> categoryList = categoriesList.get(categoryIndex);
+        // Get selected category
+        int categoryIndex = categorySpinner.getSelectedItemPosition();
+        List<String> categoryList = categoriesList.get(categoryIndex);
 
-            int randomIndex = new Random().nextInt(categoryList.size());
+        // Generate random index
+        int randomIndex = new Random().nextInt(categoryList.size());
 
-            word = categoryList.get(randomIndex);
-        }
+        // Get word from list
+        String word = categoryList.get(randomIndex);
 
+        // Set word in text view
         wordTextView.setText(word);
 
+        // Reset timer
         if (timerRunning) {
-            if (countDownTimer != null) {
-                countDownTimer.cancel();
-            }
+            countDownTimer.cancel();
             timerRunning = false;
         }
         timeLeftInMillis = 60000;
@@ -414,12 +396,28 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onSaveInstanceState(@NonNull Bundle outState) {
         super.onSaveInstanceState(outState);
+        outState.putInt("category", categorySpinner.getSelectedItemPosition());
+        outState.putString("word", wordTextView.getText().toString());
+        outState.putLong("timeLeftInMillis", timeLeftInMillis);
+        outState.putBoolean("timerRunning", timerRunning);
+        if (timerRunning) {
+            countDownTimer.cancel();
+        }
+    }
 
-        sharedPreferences.edit().putString("word", word).apply();
-        sharedPreferences.edit().putBoolean("visibility", visibility).apply();
-        sharedPreferences.edit().putLong("timeLeftInMillis", timeLeftInMillis).apply();
-        sharedPreferences.edit().putBoolean("timerRunning", timerRunning).apply();
-        sharedPreferences.edit().putString("currentWord", wordTextView.getText().toString()).apply();
-        updateTimerText();
+    @Override
+    protected void onRestoreInstanceState(Bundle savedInstanceState) {
+        super.onRestoreInstanceState(savedInstanceState);
+        int category = savedInstanceState.getInt("category");
+        categorySpinner.setSelection(category);
+        String word = savedInstanceState.getString("word");
+        wordTextView.setText(word);
+        timeLeftInMillis = savedInstanceState.getLong("timeLeftInMillis");
+        timerRunning = savedInstanceState.getBoolean("timerRunning");
+        if (timerRunning) {
+            startTimer();
+        } else {
+            updateTimerText();
+        }
     }
 }
