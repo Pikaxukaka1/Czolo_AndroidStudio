@@ -1,19 +1,17 @@
 package com.example.czolo;
 
-import android.view.Gravity;
 import android.widget.BaseAdapter;
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.BaseAdapter;
 import android.widget.TextView;
 import java.util.List;
 
 public class CategorySpinnerAdapter extends BaseAdapter {
-    private Context context;
-    private List<List<String>> categoriesList;
-    private List<String> labelsList;
+    private final Context context;
+    private final List<List<String>> categoriesList;
+    private final List<String> labelsList;
 
     public CategorySpinnerAdapter(Context context, List<List<String>> categoriesList, List<String> labelsList) {
         this.context = context;

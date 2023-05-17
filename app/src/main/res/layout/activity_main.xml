@@ -73,6 +73,7 @@
         app:layout_constraintBottom_toTopOf="@+id/timer_text_view"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
+        tools:ignore="TextContrastCheck"
         tools:visibility="visible" />
 
     <TextView
@@ -106,20 +107,22 @@
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/howToPlay"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        tools:ignore="TextContrastCheck" />
 
     <Button
         android:id="@+id/howToPlay"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/how"
-        android:height="75dp"
         android:width="175dp"
-        android:textSize="20sp"
+        android:height="75dp"
         android:backgroundTint="@color/pinkk"
+        android:text="@string/how"
         android:textColor="@color/whiteBest"
+        android:textSize="20sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/shuffle_button" />
+        app:layout_constraintStart_toEndOf="@+id/shuffle_button"
+        tools:ignore="TextContrastCheck" />
 </androidx.constraintlayout.widget.ConstraintLayout>

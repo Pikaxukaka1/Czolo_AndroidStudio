@@ -50,7 +50,7 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="150dp"
         android:width="300dp"
-        android:height="150dp"
+        android:height="125dp"
         android:backgroundTint="#D36080"
         android:text="@string/start"
         android:textColor="#FEF2F4"
@@ -65,7 +65,7 @@
         android:id="@+id/textView3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="10dp"
+        android:layout_marginBottom="15dp"
         android:text="@string/czas"
         android:textColor="#FEF2F4"
         android:textSize="50sp"
@@ -73,6 +73,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
+        tools:ignore="TextContrastCheck"
         tools:visibility="visible" />
 
     <TextView
@@ -102,11 +103,12 @@
         android:height="75dp"
         android:backgroundTint="#D36080"
         android:text="@string/losuj"
-        android:textColor="#FEF2F4"
+        android:textColor="#FCE4EC"
         android:textSize="20sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        tools:ignore="TextContrastCheck" />
 
     <Button
         android:id="@+id/howToPlay"
@@ -121,5 +123,6 @@
         android:textSize="20sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+        app:layout_constraintEnd_toEndOf="parent"
+        tools:ignore="TextContrastCheck" />
 </androidx.constraintlayout.widget.ConstraintLayout>
