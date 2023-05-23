@@ -51,7 +51,7 @@ public class MainActivity extends AppCompatActivity {
         shuffleButton = findViewById(R.id.shuffle_button);
 
         List<String> animalsList = new ArrayList<>();
-        animalsList.add("Kot");
+
 
         try {
             InputStream inputStream = getAssets().open("animals.txt");
@@ -67,6 +67,8 @@ public class MainActivity extends AppCompatActivity {
             e.printStackTrace();
         }
 
+
+
         List<String> fruitsList = new ArrayList<>();
         fruitsList.add("Mango");
 
@@ -76,13 +78,15 @@ public class MainActivity extends AppCompatActivity {
 
             String line;
             while ((line = reader.readLine()) != null) {
-                animalsList.add(line);
+                fruitsList.add(line);
             }
 
             reader.close();
         } catch (IOException e) {
             e.printStackTrace();
         }
+
+
 
         List<String> countriesList = new ArrayList<>();
         countriesList.add("Polska");
@@ -93,13 +97,15 @@ public class MainActivity extends AppCompatActivity {
 
             String line;
             while ((line = reader.readLine()) != null) {
-                animalsList.add(line);
+                countriesList.add(line);
             }
 
             reader.close();
         } catch (IOException e) {
             e.printStackTrace();
         }
+
+
 
         List<String> sportsList = new ArrayList<>();
         sportsList.add("Koszykówka");
@@ -110,13 +116,15 @@ public class MainActivity extends AppCompatActivity {
 
             String line;
             while ((line = reader.readLine()) != null) {
-                animalsList.add(line);
+                sportsList.add(line);
             }
 
             reader.close();
         } catch (IOException e) {
             e.printStackTrace();
         }
+
+
 
         List<String> gameList = new ArrayList<>();
         gameList.add("Wiedźmin");
@@ -127,13 +135,15 @@ public class MainActivity extends AppCompatActivity {
 
             String line;
             while ((line = reader.readLine()) != null) {
-                animalsList.add(line);
+                gameList.add(line);
             }
 
             reader.close();
         } catch (IOException e) {
             e.printStackTrace();
         }
+
+
 
         categoriesList = new ArrayList<>();
         categoriesList.add(animalsList);
