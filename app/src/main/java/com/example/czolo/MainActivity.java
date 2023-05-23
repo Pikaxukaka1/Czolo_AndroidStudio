@@ -15,6 +15,11 @@ import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.Spinner;
 import android.widget.TextView;
+
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
@@ -25,7 +30,6 @@ public class MainActivity extends AppCompatActivity {
     private Spinner categorySpinner;
     private TextView wordTextView, timerTextView;
     private Button startButton, shuffleButton;
-
     private List<List<String>> categoriesList;
 
     private CountDownTimer countDownTimer;
@@ -47,208 +51,89 @@ public class MainActivity extends AppCompatActivity {
         shuffleButton = findViewById(R.id.shuffle_button);
 
         List<String> animalsList = new ArrayList<>();
-        animalsList.add("Lew");
-        animalsList.add("Tygrys");
-        animalsList.add("Słoń");
-        animalsList.add("Żyrafa");
-        animalsList.add("Zebra");
-        animalsList.add("Kapibara");
-        animalsList.add("Pies");
         animalsList.add("Kot");
-        animalsList.add("Kangur");
-        animalsList.add("Królik");
-        animalsList.add("Żuraw");
-        animalsList.add("Żółw");
-        animalsList.add("Krowa");
-        animalsList.add("Koń");
-        animalsList.add("Wielbłąd");
-        animalsList.add("Wąż");
-        animalsList.add("Paw");
-        animalsList.add("Małpa");
-        animalsList.add("Kaczka");
-        animalsList.add("Kura");
-        animalsList.add("Indyk");
-        animalsList.add("Wilk");
-        animalsList.add("Lis");
-        animalsList.add("Aligator");
-        animalsList.add("Floppa");
-        animalsList.add("Mrówkojad");
-        animalsList.add("Dzik");
-        animalsList.add("Pancernik");
-        animalsList.add("Lama");
-        animalsList.add("Alpaka");
-        animalsList.add("Struś");
-        animalsList.add("Owca");
-        animalsList.add("Osioł");
-        animalsList.add("Koza");
-        animalsList.add("Gęś");
-        animalsList.add("Foka");
-        animalsList.add("Surykatka");
-        animalsList.add("Lemur");
-        animalsList.add("Pingwin");
-        animalsList.add("Antylopa");
-        animalsList.add("Puma");
+
+        try {
+            InputStream inputStream = getAssets().open("animals.txt");
+            BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream));
+
+            String line;
+            while ((line = reader.readLine()) != null) {
+                animalsList.add(line);
+            }
+
+            reader.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 
         List<String> fruitsList = new ArrayList<>();
-        fruitsList.add("Jabłko");
-        fruitsList.add("Banan");
-        fruitsList.add("Pomarańcza");
-        fruitsList.add("Gruszka");
-        fruitsList.add("Kiwi");
-        fruitsList.add("Śliwka");
-        fruitsList.add("Arbuz");
-        fruitsList.add("Awokado");
-        fruitsList.add("Ananas");
-        fruitsList.add("Cytryna");
-        fruitsList.add("Brzoskwinia");
-        fruitsList.add("Mandarynka");
-        fruitsList.add("Czereśnia");
-        fruitsList.add("Granat");
-        fruitsList.add("Kokos");
-        fruitsList.add("Jagoda");
-        fruitsList.add("Liczi");
-        fruitsList.add("Limonka");
-        fruitsList.add("Malina");
-        fruitsList.add("Truskawka");
         fruitsList.add("Mango");
-        fruitsList.add("Melon");
-        fruitsList.add("Morela");
-        fruitsList.add("Nektarynka");
-        fruitsList.add("Orzech");
-        fruitsList.add("Poziomka");
-        fruitsList.add("Wiśnia");
-        fruitsList.add("Winogrono");
-        fruitsList.add("Żurawina");
+
+        try {
+            InputStream inputStream = getAssets().open("fruits.txt");
+            BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream));
+
+            String line;
+            while ((line = reader.readLine()) != null) {
+                animalsList.add(line);
+            }
+
+            reader.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 
         List<String> countriesList = new ArrayList<>();
-        countriesList.add("Usa");
-        countriesList.add("Chiny");
-        countriesList.add("Indie");
-        countriesList.add("Japonia");
         countriesList.add("Polska");
-        countriesList.add("Afganistan");
-        countriesList.add("Albania");
-        countriesList.add("Algieria");
-        countriesList.add("Andora");
-        countriesList.add("Angola");
-        countriesList.add("Argentyna");
-        countriesList.add("Armenia");
-        countriesList.add("Australia");
-        countriesList.add("Belgia");
-        countriesList.add("Białoruś");
-        countriesList.add("Boliwia");
-        countriesList.add("Brazylia");
-        countriesList.add("Bułgaria");
-        countriesList.add("Chile");
-        countriesList.add("Chorwacja");
-        countriesList.add("Czechy");
-        countriesList.add("Dania");
-        countriesList.add("Dominikana");
-        countriesList.add("Egipt");
-        countriesList.add("Ekwador");
-        countriesList.add("Estonia");
-        countriesList.add("Etiopia");
-        countriesList.add("Filipiny");
-        countriesList.add("Finlandia");
-        countriesList.add("Francja");
-        countriesList.add("Grecja");
-        countriesList.add("Grenlandia");
-        countriesList.add("Gruzja");
-        countriesList.add("Hiszpania");
-        countriesList.add("Holandia");
-        countriesList.add("Indie");
-        countriesList.add("Irak");
-        countriesList.add("Iran");
-        countriesList.add("Irlandia");
-        countriesList.add("Islandia");
-        countriesList.add("Izrael");
-        countriesList.add("Jamajka");
-        countriesList.add("Kanada");
-        countriesList.add("Katar");
-        countriesList.add("Kenia");
-        countriesList.add("Kolumbia");
-        countriesList.add("Kongo");
-        countriesList.add("Korea");
-        countriesList.add("Kuba");
-        countriesList.add("Libia");
-        countriesList.add("Litwa");
-        countriesList.add("Łotwa");
-        countriesList.add("Madagaskar");
-        countriesList.add("Malezja");
-        countriesList.add("Mali");
-        countriesList.add("Malediwy");
-        countriesList.add("Malta");
-        countriesList.add("Maroko");
-        countriesList.add("Meksyk");
-        countriesList.add("Monako");
-        countriesList.add("Niemcy");
-        countriesList.add("Niger");
-        countriesList.add("Nigeria");
-        countriesList.add("Norwegia");
-        countriesList.add("Pakistan");
-        countriesList.add("Peru");
-        countriesList.add("Portugalia");
-        countriesList.add("Rumunia");
-        countriesList.add("Szwajcaria");
-        countriesList.add("Szwecja");
-        countriesList.add("Tajlandia");
-        countriesList.add("Turcja");
-        countriesList.add("Ukraina");
-        countriesList.add("Włochy");
-        countriesList.add("Wielka Brytania");
+
+        try {
+            InputStream inputStream = getAssets().open("countries.txt");
+            BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream));
+
+            String line;
+            while ((line = reader.readLine()) != null) {
+                animalsList.add(line);
+            }
+
+            reader.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 
         List<String> sportsList = new ArrayList<>();
         sportsList.add("Koszykówka");
-        sportsList.add("Siadkówka");
-        sportsList.add("Tenis");
-        sportsList.add("Piłka ręczna");
-        sportsList.add("Piłka nożna");
-        sportsList.add("Boks");
-        sportsList.add("Judo");
-        sportsList.add("Karate");
-        sportsList.add("Lekkoatletyka");
-        sportsList.add("Pływanie");
-        sportsList.add("Szermierka");
-        sportsList.add("Zapasy");
-        sportsList.add("Golf");
-        sportsList.add("Wspinaczka");
-        sportsList.add("Snowboard");
-        sportsList.add("Narciarstwo");
-        sportsList.add("Badminton");
-        sportsList.add("Akrobatyka");
+
+        try {
+            InputStream inputStream = getAssets().open("sports.txt");
+            BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream));
+
+            String line;
+            while ((line = reader.readLine()) != null) {
+                animalsList.add(line);
+            }
+
+            reader.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 
         List<String> gameList = new ArrayList<>();
         gameList.add("Wiedźmin");
-        gameList.add("The Forest");
-        gameList.add("Cyberpunk 2077");
-        gameList.add("Among Us");
-        gameList.add("League Of Legends");
-        gameList.add("StarWars");
-        gameList.add("Darkest Dungeon");
-        gameList.add("Diablo");
-        gameList.add("GTA");
-        gameList.add("Gothic");
-        gameList.add("Metin");
-        gameList.add("Dying Light");
-        gameList.add("Fallout");
-        gameList.add("Elden Ring");
-        gameList.add("Skyrim");
-        gameList.add("The Sims");
-        gameList.add("CS:GO");
-        gameList.add("Assassin");
-        gameList.add("God of War");
-        gameList.add("Far Cry");
-        gameList.add("FIFA");
-        gameList.add("LEGO");
-        gameList.add("Batman");
-        gameList.add("Bloodborne");
-        gameList.add("Minecraft");
-        gameList.add("SpellForce");
-        gameList.add("Sekiro");
-        gameList.add("Kangurek Kao");
-        gameList.add("Metro");
-        gameList.add("Uncharted");
-        gameList.add("Amnesia");
+
+        try {
+            InputStream inputStream = getAssets().open("games.txt");
+            BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream));
+
+            String line;
+            while ((line = reader.readLine()) != null) {
+                animalsList.add(line);
+            }
+
+            reader.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 
         categoriesList = new ArrayList<>();
         categoriesList.add(animalsList);

@@ -1,0 +1,48 @@
+Piłka nożna
+Koszykówka
+Siatkówka
+Tenis
+Piłka ręczna
+Hokej
+Biegi długodystansowe
+Pływanie
+Gimnastyka
+Lekkoatletyka
+Boks
+Kolarstwo
+Narciarstwo alpejskie
+Snowboard
+Judo
+Karate
+Taekwondo
+Wspinaczka sportowa
+Golf
+Kajakarstwo
+Rugby
+Baseball
+Softball
+Surfing
+Windsurfing
+Narciarstwo dowolne
+Wioślarstwo
+Hokej na trawie
+Strzelectwo
+Łyżwiarstwo figurowe
+Skoki narciarskie
+Biegi sprinterskie
+Triathlon
+Siatkówka plażowa
+Rugby 7
+Boks tajski
+Szermierka
+Badminton
+Kajakarstwo górskie
+Spadochroniarstwo
+Kitesurfing
+Nurkowanie
+Szachy
+Brydż
+Wioślarstwo
+Kickboxing
+Gimnastyka artystyczna
+Wakeboarding
